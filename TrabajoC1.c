@@ -6,6 +6,7 @@ struct Estudiante {
     char nombre[50];
     int edad;
     float calificacion;
+    int documento;
 };
 
 // Función para agregar un nuevo estudiante
@@ -13,6 +14,8 @@ void agregarEstudiante(struct Estudiante *estudiantes, int *cantidad) {
     printf("Agregar nuevo estudiante:\n");
     printf("Nombre: ");
     scanf("%s", estudiantes[*cantidad].nombre);
+    printf("Ingrese el DNI:");
+    scanf("%d",&estudiantes[*cantidad].documento);
     printf("Edad: ");
     scanf("%d", &estudiantes[*cantidad].edad);
     printf("Calificación: ");
@@ -22,25 +25,28 @@ void agregarEstudiante(struct Estudiante *estudiantes, int *cantidad) {
 }
 
 // Función para mostrar todos los estudiantes registrados
-void mostrarEstudiantes(struct Estudiante *estudiantes, int cantidad) {
+void mostrarEstudiantes(struct Estudiante *estudiantes, int cantidad){
+	int i;
     printf("\nLista de estudiantes registrados:\n");
-    for (int i = 0; i < cantidad; i++) {
+    for ( i = 0; i < cantidad; i++) {
         printf("Estudiante %d:\n", i + 1);
         printf("Nombre: %s\n", estudiantes[i].nombre);
         printf("Edad: %d\n", estudiantes[i].edad);
         printf("Calificación: %.2f\n", estudiantes[i].calificacion);
+        printf("Documento:%d\n",estudiantes[i].documento);
     }
 }
 
 // Función para actualizar la calificación de un estudiante
 void actualizarCalificacion(struct Estudiante *estudiantes, int cantidad) {
-    char nombre[50];
+    int dni;
+    int i;
     printf("Actualizar calificación de un estudiante\n");
-    printf("Ingrese el nombre del estudiante: ");
-    scanf("%s", nombre);
+    printf("Ingrese eldocumento del estudiante:");
+    scanf("%d",&dni);
 
-    for (int i = 0; i < cantidad; i++) {
-        if (strcmp(estudiantes[i].nombre, nombre) == 0) {
+    for (i = 0; i < cantidad; i++) {
+        if (dni == estudiantes[i].documento) {
             printf("Estudiante encontrado.\n");
             printf("Calificación actual: %.2f\n", estudiantes[i].calificacion);
             printf("Nueva calificación: ");
@@ -55,7 +61,8 @@ void actualizarCalificacion(struct Estudiante *estudiantes, int cantidad) {
 // Función para calcular el promedio de calificaciones
 void calcularPromedio(struct Estudiante *estudiantes, int cantidad) {
     float suma = 0;
-    for (int i = 0; i < cantidad; i++) {
+    int i;
+    for (i = 0; i < cantidad; i++) {
         suma += estudiantes[i].calificacion;
     }
     float promedio = suma / cantidad;
